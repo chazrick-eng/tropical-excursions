@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Tropical Excursions</title>
+<meta name="description" content="Tropical Excursions runs curated Jamaica day trips and overseas Caribbean escapes with islandwide pickup.">
+<meta property="og:image" content="assets/img/hero-beach.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap-wide">
+      <span class="eyebrow">Who we are</span>
+      <h1>We make the island<br><span class="script">easy to explore.</span></h1>
+      <p>Tropical Excursions is a Caribbean tour operator built around one idea: incredible days out shouldn't take any planning on your part.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-wide">
+      <div class="about-grid">
+        <div class="about-img reveal"><img src="assets/img/stock-island.jpg" alt="Lush Caribbean island and turquoise water"></div>
+        <div class="reveal">
+          <span class="eyebrow">Our story</span>
+          <h2 class="h-lg" style="margin:12px 0 16px">From a few group chats to islandwide adventures</h2>
+          <p class="muted">What started as organising trips for friends has grown into curated excursions across Jamaica and beyond. We know the coves, the jerk spots and the resorts worth the early start — and we handle the logistics so you don't have to.</p>
+          <p class="muted">Today we run regular Jamaica day trips with pickup from towns across the island, plus overseas Caribbean getaways for travellers and diaspora alike.</p>
+          <p><span class="note-flag">Placeholder story — send us your real founding story to drop in</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap-wide">
+      <div class="section-head center" style="text-align:center;max-width:560px;margin:0 auto 40px">
+        <span class="eyebrow center">Why travel with us</span>
+        <h2 class="h-xl" style="margin-top:12px">What makes us different</h2>
+      </div>
+      <div class="feature-grid" id="features"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-wide">
+      <div class="stat-band">
+        <div class="reveal"><b>6+</b><span>Pickup towns islandwide</span></div>
+        <div class="reveal"><b>2</b><span>Countries &amp; counting</span></div>
+        <div class="reveal"><b>100%</b><span>All-inclusive day passes</span></div>
+        <div class="reveal"><b>0</b><span>Planning needed from you</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-bottom:clamp(54px,8vw,100px)">
+    <div class="wrap-wide">
+      <div class="cta-band reveal" style="position:relative;border-radius:var(--r-lg);overflow:hidden;color:#fff;text-align:center;padding:clamp(48px,7vw,80px) var(--pad);isolation:isolate">
+        <img src="assets/img/hero-beach.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2">
+        <h2 style="color:#fff;font-size:clamp(2rem,4vw,3rem)">Come see what we're about</h2>
+        <p style="color:#eaf4ec;max-width:44ch;margin:14px auto 28px;font-size:1.1rem">Browse the next set of excursions and grab your spot.</p>
+        <div class="cta-actions" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+          <a class="btn btn-primary btn-lg" href="trips.html">Browse trips</a>
+          <a class="btn btn-light btn-lg" href="contact.html">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/trips.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+  mountChrome("about.html");
+  const feats = [
+    ["pin","var(--teal)","Islandwide pickup","We collect you from Spanish Town to Montego Bay — no need to find your own way to the start."],
+    ["check","var(--palm)","Curated experiences","Every trip is hand-picked and all-inclusive: passes, meals and the good stops built in."],
+    ["wa","var(--sunset)","Diaspora-friendly","Pricing in JMD and USD, a US contact line, and overseas packages made for travellers coming home."]
+  ];
+  document.getElementById("features").innerHTML = feats.map(([ic,col,h,p])=>`
+    <div class="feature reveal"><div class="ic" style="background:${col}">${ICON[ic]}</div><h3>${h}</h3><p>${p}</p></div>`).join("");
+  initReveal();
+</script>
+</body>
+</html>

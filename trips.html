@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trips — Tropical Excursions</title>
+<meta name="description" content="Browse all Tropical Excursions trips — Jamaica day trips and overseas Caribbean packages. Filter by type and date.">
+<meta property="og:title" content="Trips — Tropical Excursions">
+<meta property="og:image" content="assets/img/hero-beach.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+.page-hero{background:linear-gradient(160deg,#14211a,#1d3b30);color:#fff;padding:clamp(54px,8vw,96px) 0 clamp(40px,6vw,68px);position:relative;overflow:hidden}
+.page-hero::after{content:"";position:absolute;right:-80px;top:-80px;width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,148,43,.32),transparent 70%)}
+.page-hero h1{color:#fff;font-size:clamp(2.4rem,5.5vw,4rem)}
+.page-hero h1 .script{color:var(--leaf);font-weight:400}
+.page-hero p{color:#cfddd2;max-width:54ch;margin-top:16px;font-size:1.15rem}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:36px 0 34px}
+.filter{font-family:var(--f-head);font-weight:600;font-size:.95rem;padding:11px 20px;border-radius:999px;
+  border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:.18s}
+.filter:hover{border-color:var(--palm)}
+.filter.active{background:var(--palm);border-color:var(--palm);color:#fff;box-shadow:0 8px 18px -8px rgba(60,140,47,.6)}
+.filter .n{opacity:.6;font-size:.85em;margin-left:.3em}
+.filter.active .n{opacity:.85}
+.empty{text-align:center;padding:60px 0;color:var(--ink-2)}
+.cat-note{display:flex;align-items:center;gap:.6em;color:var(--ink-2);font-size:.95rem;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap-wide">
+      <span class="eyebrow" style="color:var(--leaf)">The catalog</span>
+      <h1>Every trip, <span class="script">one place.</span></h1>
+      <p>Jamaica day trips with islandwide pickup and overseas Caribbean escapes. New excursions are added all the time — book early, spots move fast.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;margin-top:-22px">
+    <div class="wrap-wide">
+      <div class="filters" id="filters"></div>
+      <div class="card-grid" id="grid"></div>
+      <div class="empty" id="empty" hidden>No trips in this category yet — <a href="#" id="empty-all">show all trips</a>.</div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/trips.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+  mountChrome("trips.html");
+
+  const FILTERS = [
+    ["all","All trips", t=>true],
+    ["jamaica","Jamaica Day Trips", t=>t.type==="jamaica_day_trip"],
+    ["overseas","Overseas Packages", t=>t.type==="overseas_package"],
+    ["upcoming","Upcoming", t=>TX.status(t)!=="past"],
+    ["past","Past", t=>TX.status(t)==="past"]
+  ];
+
+  function sortTrips(list){
+    // upcoming ascending by date; past most-recent first
+    const up = list.filter(t=>TX.status(t)!=="past").sort(TX.byDate);
+    const past = list.filter(t=>TX.status(t)==="past").sort((a,b)=>b.date_sort<a.date_sort?-1:1);
+    return [...up, ...past];
+  }
+
+  function render(key){
+    const f = FILTERS.find(x=>x[0]===key) || FILTERS[0];
+    const list = sortTrips(TRIPS.filter(f[2]));
+    const grid = document.getElementById("grid");
+    const empty = document.getElementById("empty");
+    grid.innerHTML = list.map(tripCard).join("");
+    empty.hidden = list.length>0;
+    grid.hidden = list.length===0;
+    document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active", b.dataset.k===key));
+    history.replaceState(null,"", key==="all" ? "trips.html" : "trips.html#"+key);
+    initReveal();
+  }
+
+  // build filter buttons with counts
+  document.getElementById("filters").innerHTML = FILTERS.map(f=>{
+    const n = TRIPS.filter(f[2]).length;
+    return `<button class="filter" data-k="${f[0]}">${f[1]}<span class="n">${n}</span></button>`;
+  }).join("");
+  document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>render(b.dataset.k)));
+  document.getElementById("empty-all").addEventListener("click",e=>{e.preventDefault();render("all");});
+
+  const start = (location.hash||"").replace("#","");
+  render(FILTERS.some(f=>f[0]===start) ? start : "all");
+</script>
+</body>
+</html>

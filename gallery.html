@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Tropical Excursions</title>
+<meta name="description" content="Photos from Tropical Excursions trips across Jamaica and the Caribbean.">
+<meta property="og:image" content="assets/img/hero-beach.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap-wide">
+      <span class="eyebrow">The moments</span>
+      <h1>Postcards from <span class="script">the road.</span></h1>
+      <p>A look at the coves, beaches and resorts we visit. Real trip photos are on the way — follow along on Instagram for the latest.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-wide">
+      <p class="center" style="margin-bottom:30px"><span class="note-flag">Placeholder imagery from flyers — swap in real trip photos for full-resolution shots</span></p>
+      <div class="masonry" id="masonry"></div>
+      <div class="center" style="margin-top:44px">
+        <a class="foot-ig" id="ig-link" href="#" target="_blank" rel="noopener" style="color:var(--teal-dk);font-size:1.1rem"></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="lightbox" id="lightbox"><span class="close" id="lb-close">✕</span><img id="lb-img" alt=""></div>
+<div id="site-footer"></div>
+<script src="assets/js/trips.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+  mountChrome("gallery.html");
+  document.getElementById("ig-link").href = "https://instagram.com/"+SITE.instagram;
+  document.getElementById("ig-link").innerHTML = ICON.ig + " See more @"+SITE.instagram;
+
+  const imgs = [
+    "assets/img/stock-cove.jpg","assets/img/stock-beach.jpg","assets/img/bay-tt.jpg",
+    "assets/img/stock-island.jpg","assets/img/stock-underwater.jpg","assets/img/hero-beach.jpg",
+    "assets/img/stock-waves.jpg","assets/img/stock-sunset.jpg","assets/img/stock-palms.jpg"
+  ];
+  document.getElementById("masonry").innerHTML = imgs.map((src,i)=>`
+    <a href="#" data-full="${src}"><img src="${src}" alt="Trip photo ${i+1}" loading="lazy"></a>`).join("");
+
+  const lb = document.getElementById("lightbox"), lbi = document.getElementById("lb-img");
+  document.querySelectorAll(".masonry a").forEach(a=>a.addEventListener("click",e=>{
+    e.preventDefault(); lbi.src=a.dataset.full; lb.classList.add("show");
+  }));
+  document.getElementById("lb-close").addEventListener("click",()=>lb.classList.remove("show"));
+  lb.addEventListener("click",e=>{if(e.target===lb)lb.classList.remove("show");});
+</script>
+</body>
+</html>

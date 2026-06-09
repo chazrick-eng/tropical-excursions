@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Tropical Excursions</title>
+<meta name="description" content="Get in touch with Tropical Excursions — WhatsApp, phone, Instagram, or send an inquiry about any trip.">
+<meta property="og:image" content="assets/img/hero-beach.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap-wide">
+      <span class="eyebrow">Say hello</span>
+      <h1>Let's plan your <span class="script">next day out.</span></h1>
+      <p>Message us on WhatsApp for the fastest reply, give us a call, or send the inquiry form and we'll come back to you.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-wide">
+      <div class="contact-grid">
+        <div>
+          <div class="contact-card reveal">
+            <div class="ic" style="background:var(--wa)"><span id="ic-wa"></span></div>
+            <div>
+              <h4>WhatsApp</h4>
+              <p style="margin-bottom:6px">Fastest way to reach us — booking, questions, the lot.</p>
+              <a id="wa-link" href="#" target="_blank" rel="noopener" style="color:var(--wa-dk)">Open WhatsApp chat</a>
+            </div>
+          </div>
+          <div class="contact-card reveal">
+            <div class="ic" style="background:var(--teal)"><span id="ic-phone"></span></div>
+            <div id="phones-box">
+              <h4>Call us</h4>
+            </div>
+          </div>
+          <div class="contact-card reveal">
+            <div class="ic" style="background:var(--sunset)"><span id="ic-ig"></span></div>
+            <div>
+              <h4>Instagram</h4>
+              <p style="margin-bottom:6px">See trips, giveaways and behind-the-scenes.</p>
+              <a id="ig-link" href="#" target="_blank" rel="noopener" style="color:var(--sunset-dk)"></a>
+            </div>
+          </div>
+          <div class="contact-card reveal" style="background:var(--sand-2);border-style:dashed">
+            <div class="ic" style="background:var(--ink-3)"><span id="ic-pin"></span></div>
+            <div>
+              <h4>Base location</h4>
+              <p>We're islandwide across Jamaica with pickup from major towns. <span class="note-flag" style="margin-top:8px">Physical base / email not yet supplied</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card reveal" id="form-wrap"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/trips.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+  mountChrome("contact.html");
+  document.getElementById("ic-wa").innerHTML = ICON.wa;
+  document.getElementById("ic-phone").innerHTML = ICON.phone;
+  document.getElementById("ic-ig").innerHTML = ICON.ig;
+  document.getElementById("ic-pin").innerHTML = ICON.pin;
+  // fix icon color (white) inside .ic
+  document.querySelectorAll(".contact-card .ic svg").forEach(s=>{s.style.width="22px";s.style.height="22px";s.style.color="#fff";});
+
+  document.getElementById("wa-link").href = TX.waLink(null);
+  document.getElementById("ig-link").href = "https://instagram.com/"+SITE.instagram;
+  document.getElementById("ig-link").textContent = "@"+SITE.instagram;
+
+  // phones
+  document.getElementById("phones-box").insertAdjacentHTML("beforeend",
+    SITE.phones.map(p=>`<div style="margin-top:4px"><a href="tel:${p.tel}" style="color:var(--ink)">${p.display}</a> <small style="color:var(--ink-3);font-weight:600">(${p.label})</small></div>`).join(""));
+
+  // general inquiry form with trip dropdown
+  const tripOpts = TRIPS.filter(t=>TX.status(t)!=="past").map(t=>`<option value="${t.name} — ${t.date_display}">${t.name} (${t.date_display})</option>`).join("");
+  document.getElementById("form-wrap").innerHTML = `
+    <h3 class="h-lg" style="margin-bottom:6px">Send an inquiry</h3>
+    <p class="muted" style="margin-bottom:22px">Tell us what you're interested in and we'll be in touch shortly.</p>
+    <!-- TODO: set Formspree endpoint -> action="https://formspree.io/f/XXXXXXX" -->
+    <form id="inq-form" action="#" method="POST">
+      <div class="field-row">
+        <div class="field"><label>Full name <span class="req">*</span></label><input name="name" required placeholder="Your name"></div>
+        <div class="field"><label>Phone / WhatsApp <span class="req">*</span></label><input name="phone" required placeholder="876-000-0000"></div>
+      </div>
+      <div class="field"><label>Email <small style="font-weight:400;color:var(--ink-3)">(optional)</small></label><input name="email" type="email" placeholder="you@email.com"></div>
+      <div class="field"><label>Which trip? <span class="req">*</span></label>
+        <select name="trip" required><option value="">Select a trip…</option>${tripOpts}<option value="General enquiry">General enquiry / not sure yet</option></select></div>
+      <div class="field-row">
+        <div class="field"><label># Adults</label><input name="adults" type="number" min="0" value="1"></div>
+        <div class="field"><label># Children</label><input name="children" type="number" min="0" value="0"></div>
+      </div>
+      <div class="field"><label>Preferred contact</label>
+        <select name="contact_method"><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></div>
+      <div class="field"><label>Message</label><textarea name="message" placeholder="Pickup town, group size, questions…"></textarea></div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Send inquiry</button>
+      <p class="form-note" style="text-align:center;margin-top:12px">We'll confirm shortly via WhatsApp. No payment taken here.</p>
+    </form>
+    <div class="form-ok" id="form-ok">
+      <div class="tick">${ICON.check}</div>
+      <h3 class="h-lg">Thank you!</h3>
+      <p class="muted" style="margin:10px 0 20px">We've got your inquiry and we'll be in touch shortly via WhatsApp.</p>
+      <a class="btn btn-wa" href="${TX.waLink(null)}" target="_blank" rel="noopener">${ICON.wa} Message us now</a>
+    </div>`;
+
+  const form = document.getElementById("inq-form");
+  form.addEventListener("submit", e=>{
+    e.preventDefault();
+    form.style.display="none";
+    document.getElementById("form-ok").classList.add("show");
+  });
+  initReveal();
+</script>
+</body>
+</html>

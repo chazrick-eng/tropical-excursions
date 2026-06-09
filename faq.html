@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Tropical Excursions</title>
+<meta name="description" content="Common questions about Tropical Excursions trips — pickup, what to bring, payment, group rates and overseas travel.">
+<meta property="og:image" content="assets/img/hero-beach.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap-wide">
+      <span class="eyebrow">Good to know</span>
+      <h1>Questions, <span class="script">answered.</span></h1>
+      <p>Everything about pickup, payment and what to expect on the day. Still unsure? Message us on WhatsApp — we reply fast.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-wide">
+      <div class="faq-list" id="faq"></div>
+      <p class="center" style="margin-top:40px">
+        <span class="note-flag">Cancellation / refund &amp; deposit policy text is a content gap — confirm the official wording before publishing.</span>
+      </p>
+      <div class="center" style="margin-top:30px">
+        <p class="muted">Didn't find your answer?</p>
+        <a class="btn btn-wa btn-lg" id="faq-wa" href="#" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/trips.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+  mountChrome("faq.html");
+  document.getElementById("faq-wa").href = TX.waLink(null);
+  document.getElementById("faq-wa").innerHTML = ICON.wa + " Ask us on WhatsApp";
+
+  const FAQ = [
+    ["Pickup & logistics", [
+      ["Where do you pick up from?","Our day trips offer pickup from towns across Jamaica — typically Spanish Town, Portmore, St. Andrew/Kingston, Montego Bay, Ocho Rios and Mandeville. Exact towns vary by trip and are listed on each trip page. Don't see yours? Ask us and we'll see what we can arrange."],
+      ["What time is pickup?","Pickup times depend on your town and the destination, since we travel as a group. Once you book, we confirm your specific pickup point and time over WhatsApp."],
+      ["How long are the day trips?","Day trips are full-day excursions — expect an early start and an evening return. The exact return time depends on traffic and the day's itinerary."]
+    ]],
+    ["What to bring", [
+      ["What should I bring on a day trip?","Swimwear, a towel, sunscreen, a change of clothes, and any personal items you'll want for the beach. For resort day passes, bring a valid ID. We'll send a short reminder list before your trip.","flag"],
+      ["Is food included?","It varies by trip. Most include refreshments, and resort passes include buffet meals — check the inclusions list on each trip page for exactly what's covered."]
+    ]],
+    ["Payment & pricing", [
+      ["How do I pay?","We don't take payment online. Once you send an inquiry or message us on WhatsApp, we confirm your spot and arrange payment with you directly.","flag"],
+      ["Do you offer group rates?","Yes — groups of 3 or more travelling together get a reduced per-person rate on most trips. The group price is shown in each trip's pricing table."],
+      ["Can I pay in JMD or USD?","Jamaica day trips are priced in JMD with USD shown where available. Overseas packages are priced in USD. We can talk through options when you book."]
+    ]],
+    ["Overseas packages", [
+      ["What's included in an overseas package?","Overseas escapes are all-inclusive of accommodation, round-trip airfare, breakfast, airport transfers and listed activities — see the specific trip page. We even help prepare your travel documents."],
+      ["Do you help with travel documents?","Yes. Preparation of travel documents is part of our overseas packages. We'll guide you through what's needed once you book."]
+    ]],
+    ["Cancellations & refunds", [
+      ["What is your cancellation and refund policy?","This is being finalised — please confirm directly with us when you book. We'll always be upfront about deposits and what happens if plans change.","flag"]
+    ]]
+  ];
+
+  document.getElementById("faq").innerHTML = FAQ.map(([cat,items])=>`
+    <div class="faq-cat">${cat}</div>
+    ${items.map(([q,a,flag])=>`
+      <details class="faq-item">
+        <summary>${q}<span class="pm">+</span></summary>
+        <div class="ans">${a}${flag?` <span class="note-flag" style="margin-top:10px">Confirm official wording</span>`:""}</div>
+      </details>`).join("")}
+  `).join("");
+  initReveal();
+</script>
+</body>
+</html>

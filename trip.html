@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip — Tropical Excursions</title>
+<meta name="description" content="Trip details, inclusions, pickup locations and pricing. Book Tropical Excursions on WhatsApp.">
+<meta property="og:image" content="assets/img/hero-beach.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@500;600;700;800&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+.t-hero{position:relative;color:#fff;overflow:hidden;
+  background:linear-gradient(150deg,rgba(var(--acc),1),rgba(var(--acc),.78))}
+.t-hero::before{content:"";position:absolute;right:-10%;top:-30%;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.16),transparent 68%)}
+.t-hero-in{position:relative;display:grid;grid-template-columns:1.25fr .9fr;gap:46px;align-items:center;
+  max-width:1340px;margin:0 auto;padding:clamp(40px,6vw,76px) var(--pad)}
+.crumb{display:flex;align-items:center;gap:.5em;font-size:.9rem;color:rgba(255,255,255,.85);font-family:var(--f-head);font-weight:600;margin-bottom:18px}
+.crumb a{color:rgba(255,255,255,.85)}.crumb a:hover{color:#fff}
+.t-hero .badges{display:flex;gap:9px;margin-bottom:16px}
+.t-hero .badge{background:rgba(255,255,255,.2)!important;color:#fff!important}
+.t-hero h1{color:#fff;font-size:clamp(2.2rem,4.8vw,3.6rem);letter-spacing:-.02em}
+.t-hero .tagline{font-size:1.18rem;color:rgba(255,255,255,.94);margin:14px 0 22px;max-width:40ch}
+.t-meta{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:28px}
+.t-meta div{display:flex;align-items:center;gap:.5em;font-family:var(--f-head);font-weight:600;font-size:.98rem}
+.t-meta svg{width:18px;height:18px;opacity:.92}
+.t-hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.t-hero-img{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/3.2;
+  box-shadow:var(--shadow-lg);border:4px solid rgba(255,255,255,.25)}
+.t-hero-img img{width:100%;height:100%;object-fit:cover}
+@media(max-width:900px){.t-hero-in{grid-template-columns:1fr;gap:30px}.t-hero-img{aspect-ratio:16/10}}
+
+.t-body{display:grid;grid-template-columns:1.7fr .9fr;gap:46px;align-items:start}
+@media(max-width:920px){.t-body{grid-template-columns:1fr;gap:34px}}
+.block{margin-bottom:42px}
+.block h2{font-size:1.55rem;margin-bottom:18px;display:flex;align-items:center;gap:.5em}
+.block h2 .bar{width:5px;height:1.1em;background:rgba(var(--acc),1);border-radius:3px;display:inline-block}
+.aside-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);
+  padding:26px;position:sticky;top:180px}
+.aside-card .from{font-family:var(--f-head);font-weight:600;color:var(--ink-3);font-size:.82rem;text-transform:uppercase;letter-spacing:.08em}
+.aside-card .big{font-family:var(--f-head);font-weight:800;font-size:2.3rem;line-height:1;margin:4px 0 2px;color:var(--ink)}
+.aside-card .big span{font-size:1rem;font-weight:600;color:var(--ink-2)}
+.aside-card .alt{color:var(--ink-2);font-size:.95rem;margin-bottom:18px}
+.aside-facts{list-style:none;padding:0;margin:18px 0;border-top:1px solid var(--line)}
+.aside-facts li{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.aside-facts li span:first-child{color:var(--ink-2)}
+.aside-facts li span:last-child{font-family:var(--f-head);font-weight:600;text-align:right}
+.aside-card .btn{margin-top:6px}
+.aside-note{font-size:.82rem;color:var(--ink-3);text-align:center;margin-top:14px;line-height:1.5}
+.gallery-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gallery-strip a{border-radius:var(--r);overflow:hidden;aspect-ratio:1;display:block;background:var(--sand-2)}
+.gallery-strip img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gallery-strip a:hover img{transform:scale(1.07)}
+@media(max-width:560px){.gallery-strip{grid-template-columns:1fr 1fr}}
+.inq-section{background:var(--white);border-top:1px solid var(--line)}
+.inq-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:46px;align-items:start}
+@media(max-width:860px){.inq-grid{grid-template-columns:1fr;gap:30px}}
+.inq-copy h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+.inq-copy p{font-size:1.08rem;color:var(--ink-2);margin-top:14px}
+.inq-copy .wa-alt{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+.miss{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px}
+.lightbox{position:fixed;inset:0;background:rgba(10,16,12,.92);z-index:120;display:none;place-items:center;padding:30px}
+.lightbox.show{display:grid}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:14px;box-shadow:var(--shadow-lg)}
+.lightbox .close{position:absolute;top:20px;right:24px;color:#fff;font-size:2rem;cursor:pointer;font-family:var(--f-head);line-height:1}
+.not-found{text-align:center;padding:120px 20px}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<main id="main"></main>
+<div class="lightbox" id="lightbox"><span class="close" id="lb-close">✕</span><img id="lb-img" alt=""></div>
+<div id="site-footer"></div>
+
+<script src="assets/js/trips.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+  mountChrome("trips.html");
+
+  const slug = new URLSearchParams(location.search).get("slug");
+  const t = TX.get(slug);
+  const main = document.getElementById("main");
+
+  if(!t){
+    main.innerHTML = `<div class="not-found"><h1 class="h-xl">Trip not found</h1>
+      <p class="lead mx-auto" style="margin:16px auto 26px">We couldn't find that excursion. Browse the full catalog instead.</p>
+      <a class="btn btn-primary btn-lg" href="trips.html">View all trips</a></div>`;
+  } else {
+    document.title = t.name + " — Tropical Excursions";
+    const st = TX.status(t);
+    const from = TX.fromPrice(t);
+
+    // pricing rows
+    const dual = t.pricing.some(p=>p.jmd!=null) && t.pricing.some(p=>p.usd!=null) || t.currency_primary==="JMD";
+    const priceRows = t.pricing.map(p=>{
+      let main = p.free ? '<span class="price-free">FREE</span>' :
+        (p.jmd!=null ? TX.fmtMoney("JMD",p.jmd) : TX.fmtMoney("USD",p.usd));
+      let sub = "";
+      if(!p.free){
+        if(p.jmd!=null && p.usd!=null) sub = `<span> / ${TX.fmtMoney("USD",p.usd)}</span>`;
+        else if(p.usd==null && p.jmd!=null && t.currency_primary==="JMD") sub = `<span> JMD</span>`;
+      }
+      return `<tr><td class="lbl">${p.label}${p.note?`<small>${p.note}</small>`:""}</td>
+        <td class="pri">${main}${sub}</td></tr>`;
+    }).join("");
+
+    // pickup
+    const pickup = t.pickup_locations ? `
+      <div class="block">
+        <h2><span class="bar"></span>Pickup locations</h2>
+        <div class="chips">
+          ${t.pickup_locations.map(p=>`<span class="chip">${ICON.pin}${p}</span>`).join("")}
+          <span class="chip chip-ask">+ more pickups? Ask us</span>
+        </div>
+      </div>` : `
+      <div class="block">
+        <h2><span class="bar"></span>Departure</h2>
+        <div class="chips"><span class="chip">${ICON.pin}Fly-out — ${t.departure_airport||"airport TBC"}</span>
+          <span class="chip chip-ask">Confirm your departure with us</span></div>
+        <p class="note-flag" style="margin-top:14px">Departure airport to be confirmed</p>
+      </div>`;
+
+    // aside facts
+    const facts = [
+      ["Date", t.date_display],
+      ["Duration", t.duration],
+      ["Type", TX.typeLabel(t)],
+      t.pickup_locations ? ["Pickup", t.pickup_locations.length+" towns"] : ["Departure", t.departure_airport||"TBC"]
+    ];
+
+    // gallery
+    const gal = (t.gallery||[]).map(src=>`<a href="#" data-full="${src}"><img src="${src}" alt="${t.name}" loading="lazy"></a>`).join("");
+
+    // more trips
+    const more = TRIPS.filter(x=>x.slug!==t.slug && TX.status(x)!=="past").sort(TX.byDate).slice(0,3);
+
+    main.innerHTML = `
+    <section class="t-hero" data-screen-label="Trip: ${t.name}" style="--acc:${t.accentRGB}">
+      <div class="t-hero-in">
+        <div>
+          <div class="crumb"><a href="trips.html">Trips</a> <span>›</span> <span>${t.short_name||t.name}</span></div>
+          <div class="badges"><span class="badge">${TX.typeLabel(t)}</span>${statusBadge(st)}</div>
+          <h1>${t.name}</h1>
+          <p class="tagline">${t.tagline}</p>
+          <div class="t-meta">
+            <div>${ICON.cal} ${t.date_display}</div>
+            <div>${ICON.clock} ${t.duration}</div>
+          </div>
+          <div class="t-hero-actions">
+            <a class="btn btn-wa btn-lg" href="${TX.waLink(t)}" target="_blank" rel="noopener">${ICON.wa} Book via WhatsApp</a>
+            <a class="btn btn-light btn-lg" href="#inquiry">Inquiry form</a>
+          </div>
+        </div>
+        <div class="t-hero-img"><img src="${t.hero_image}" alt="${t.name}"></div>
+      </div>
+    </section>
+
+    <section class="section" style="--acc:${t.accentRGB}">
+      <div class="wrap-wide">
+        <div class="t-body">
+          <div>
+            <div class="block">
+              <h2><span class="bar"></span>About this trip</h2>
+              <p class="lead" style="max-width:62ch">${t.summary}</p>
+            </div>
+            <div class="block">
+              <h2><span class="bar"></span>What's included</h2>
+              <ul class="inc-list" style="grid-template-columns:repeat(2,1fr)">
+                ${t.inclusions.map(i=>`<li><span class="inc-ico">${ICON.check}</span>${i}</li>`).join("")}
+              </ul>
+            </div>
+            ${pickup}
+            <div class="block">
+              <h2><span class="bar"></span>Pricing</h2>
+              <table class="price-table"><thead><tr><th>Ticket</th><th style="text-align:right">Price</th></tr></thead>
+                <tbody>${priceRows}</tbody></table>
+              <p class="form-note" style="margin-top:10px">Prices shown ${t.currency_primary==="USD"?"in USD":"in JMD with USD where available"}. Group rates apply to 3+ travelling together.</p>
+            </div>
+            ${gal ? `<div class="block"><h2><span class="bar"></span>Gallery</h2><div class="gallery-strip">${gal}</div></div>` : ""}
+          </div>
+
+          <aside>
+            <div class="aside-card">
+              <div class="from">From</div>
+              <div class="big">${from?TX.fmtMoney(from.cur,from.val):"Ask us"}<span>${from&&from.cur==="JMD"?" JMD":(from?" USD":"")} · pp</span></div>
+              <div class="alt">${st==="past"?"This trip has sailed — see what's next.":"Spots are limited and move fast."}</div>
+              <a class="btn btn-wa btn-block btn-lg" href="${TX.waLink(t)}" target="_blank" rel="noopener">${ICON.wa} Book via WhatsApp</a>
+              <a class="btn btn-ghost btn-block" href="#inquiry" style="margin-top:10px">Send an inquiry</a>
+              <ul class="aside-facts">${facts.map(([k,v])=>`<li><span>${k}</span><span>${v}</span></li>`).join("")}</ul>
+              <p class="aside-note">No online payment — we confirm your spot and pricing personally over WhatsApp.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="inq-section section" id="inquiry" style="--acc:${t.accentRGB}">
+      <div class="wrap-wide">
+        <div class="inq-grid">
+          <div class="inq-copy">
+            <span class="eyebrow">Reserve your spot</span>
+            <h2>Inquire about<br>${t.short_name||t.name}</h2>
+            <p>Tell us your pickup and party size and we'll confirm availability and group pricing — usually within a few hours over WhatsApp.</p>
+            <div class="wa-alt">
+              <a class="btn btn-wa btn-lg" href="${TX.waLink(t)}" target="_blank" rel="noopener">${ICON.wa} Or message us now</a>
+            </div>
+            <div class="t-meta" style="margin-top:30px;color:var(--ink-2)">
+              ${SITE.phones.slice(0,2).map(p=>`<div style="color:var(--ink)">${ICON.phone} <a href="tel:${p.tel}">${p.display}</a> <small style="color:var(--ink-3);font-weight:600">(${p.label})</small></div>`).join("")}
+            </div>
+          </div>
+          <div class="form-card" id="form-wrap"></div>
+        </div>
+      </div>
+    </section>
+
+    ${more.length?`
+    <section class="section" style="background:var(--sand)">
+      <div class="wrap-wide">
+        <div class="section-head center" style="text-align:center;margin:0 auto 38px;max-width:560px">
+          <span class="eyebrow center">Keep exploring</span>
+          <h2 class="h-xl" style="margin-top:12px">More trips you'll love</h2>
+        </div>
+        <div class="miss">${more.map(tripCard).join("")}</div>
+      </div>
+    </section>`:""}
+    `;
+
+    // build inquiry form
+    buildForm(t);
+    // gallery lightbox
+    const lb = document.getElementById("lightbox"), lbi = document.getElementById("lb-img");
+    document.querySelectorAll(".gallery-strip a").forEach(a=>a.addEventListener("click",e=>{
+      e.preventDefault(); lbi.src=a.dataset.full; lb.classList.add("show");
+    }));
+    document.getElementById("lb-close").addEventListener("click",()=>lb.classList.remove("show"));
+    lb.addEventListener("click",e=>{if(e.target===lb)lb.classList.remove("show");});
+
+    initReveal();
+  }
+
+  function buildForm(t){
+    const pickups = t.pickup_locations || [];
+    const pickupField = pickups.length ? `
+      <div class="field"><label>Pickup location <span class="req">*</span></label>
+        <select name="pickup" required>${pickups.map(p=>`<option>${p}</option>`).join("")}<option>Other / not listed</option></select></div>`
+      : `<div class="field"><label>Departure airport</label>
+        <select name="pickup"><option>NMIA — Kingston</option><option>MBJ — Montego Bay</option><option>Not sure yet</option></select></div>`;
+
+    document.getElementById("form-wrap").innerHTML = `
+      <!-- TODO: set Formspree endpoint -> action="https://formspree.io/f/XXXXXXX" -->
+      <form id="inq-form" action="#" method="POST">
+        <input type="hidden" name="trip" value="${t.name} — ${t.date_display}">
+        <div class="field"><label>Selected trip</label>
+          <input type="text" value="${t.name} · ${t.date_display}" readonly style="font-weight:600;color:var(--ink-2)"></div>
+        <div class="field-row">
+          <div class="field"><label>Full name <span class="req">*</span></label><input name="name" required placeholder="Your name"></div>
+          <div class="field"><label>Phone / WhatsApp <span class="req">*</span></label><input name="phone" required placeholder="e.g. 876-000-0000"></div>
+        </div>
+        <div class="field"><label>Email <small style="font-weight:400;color:var(--ink-3)">(optional)</small></label><input name="email" type="email" placeholder="you@email.com"></div>
+        ${pickupField}
+        <div class="field-row">
+          <div class="field"><label># Adults</label><input name="adults" type="number" min="0" value="1"></div>
+          <div class="field"><label># Children</label><input name="children" type="number" min="0" value="0"></div>
+        </div>
+        <div class="field"><label>Preferred contact</label>
+          <select name="contact_method"><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></div>
+        <div class="field"><label>Message</label><textarea name="message" placeholder="Anything we should know? Group, occasion, questions…"></textarea></div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Send inquiry</button>
+        <p class="form-note" style="text-align:center;margin-top:12px">We'll confirm your spot shortly via WhatsApp. No payment taken here.</p>
+      </form>
+      <div class="form-ok" id="form-ok">
+        <div class="tick">${ICON.check}</div>
+        <h3 class="h-lg">Thank you!</h3>
+        <p class="muted" style="margin:10px 0 20px">We've got your inquiry for <b>${t.name}</b>. We'll confirm your spot shortly via WhatsApp.</p>
+        <a class="btn btn-wa" href="${TX.waLink(t)}" target="_blank" rel="noopener">${ICON.wa} Message us now</a>
+      </div>`;
+
+    const form = document.getElementById("inq-form");
+    form.addEventListener("submit", e=>{
+      e.preventDefault();
+      // Demo: no live endpoint. Wire Formspree action above to go live.
+      form.style.display="none";
+      document.getElementById("form-ok").classList.add("show");
+      const inq = document.getElementById("inquiry");
+      window.scrollTo({top: inq.getBoundingClientRect().top + window.scrollY - 80, behavior:"smooth"});
+    });
+  }
+</script>
+</body>
+</html>
